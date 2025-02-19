@@ -1,6 +1,3 @@
-import { Persona } from "./persona";
-import { Ventas } from "./ventas";
-
 export interface Reporte {
     id: number;
     numeroInforme: string;

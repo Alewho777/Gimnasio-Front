@@ -305,7 +305,7 @@ const ProductoTable = () => {
               )}
           </TableBody>
         </Table>
-        <Modal open={openEdit} onClose={(event, reason) => {
+        <Modal open={openEdit} onClose={(reason) => {
                 if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
                     setOpenEdit(false);
                 }
@@ -368,7 +368,7 @@ const ProductoTable = () => {
 
       </TableContainer>
 
-      <Modal open={openVenta} onClose={(event, reason) => {
+      <Modal open={openVenta} onClose={(reason) => {
         if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
           setOpenVenta(false);
         }

@@ -17,9 +17,7 @@ import {
   createTheme,
   Divider,
   Tooltip,
-  Button,
   Grid2,
-  CardMedia,
   Avatar,
   Menu,
   MenuItem,
@@ -28,7 +26,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { SupervisorAccount, Inventory, PointOfSale, Analytics } from "@mui/icons-material";
+import { SupervisorAccount, Inventory,Analytics } from "@mui/icons-material";
 import { getCurrentUser, logout } from "../assets/services/authService";
 import logoGF from "../assets/images/logoGF.svg"
 
@@ -70,10 +68,6 @@ export default function Layout() {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
 
   return (
     <ThemeProvider theme={theme}>

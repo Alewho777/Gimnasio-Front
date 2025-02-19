@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Reporte } from "../../context/reportes";
 import { API_ROUTES } from "../../config/api";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { toast } from "mui-sonner";
 
 export const getReportes = async (): Promise<Reporte[]> => {
@@ -35,17 +35,6 @@ export const createReporte = async (reporteData: any): Promise<Reporte> => {
     }
 };
 
-
-
-
-// export const deleteReporte = async (id: number): Promise<void> => {
-//     try {
-//         await axios.delete(API_ROUTES.ELIMINAR_REPORTE(id));
-//     } catch (error) {
-//         console.error("Error deleting reporte:", error);
-//         throw new Error("Error al eliminar el reporte");
-//     }
-// };
 
 
 export const eliminarReporte = async (id: number): Promise<void> => {

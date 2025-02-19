@@ -398,7 +398,7 @@ const PersonaTable = () => {
               )}
           </TableBody>
         </Table>
-        <Modal open={openEdit} onClose={(event, reason) => {
+        <Modal open={openEdit} onClose={(reason) => {
           if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
             setOpenEdit(false);
           }
