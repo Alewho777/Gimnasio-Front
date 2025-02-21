@@ -162,7 +162,6 @@ const ProductoTable = () => {
       setTotal(cantidad * selectedProducto.precio);
     } catch (error) {
       toast.error("Error al registrar la venta");
-      console.error("Detalles del error:", error);
     } finally {
       setVendiendo(false);
       setSearchTerm("");
@@ -196,7 +195,6 @@ const ProductoTable = () => {
         setSearchResults(filtered);
       }
     } catch (error) {
-      console.error("Error en búsqueda:", error);
       toast.error("Error en la búsqueda");
     } finally {
       setVendiendo(false);

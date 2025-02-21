@@ -76,7 +76,6 @@ const PersonaTable = () => {
         const dataActualizada = await getPersonas();
         setPersonas(dataActualizada);
       } catch (error) {
-        console.error("Error actualizando estados:", error);
       }
     };
 

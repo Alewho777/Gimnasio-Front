@@ -9,7 +9,6 @@ export const getVentas = async (): Promise<Ventas[]> => {
         const response = await axios.get<Ventas[]>(API_ROUTES.VENTAS);
         return response.data;
     } catch (error) {
-        console.error("Error fetching VENTAS:", error);
         throw new Error("Error al obtener Las VENTAS");
     }
 };
@@ -45,7 +44,6 @@ export const getVentasPorFecha = async (start: string, end: string): Promise<Ven
         });
         return response.data;
     } catch (error) {
-        console.error("Error fetching ventas por fecha:", error);
         throw new Error("Error al obtener ventas por fecha");
     }
 };

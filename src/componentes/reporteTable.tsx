@@ -67,7 +67,6 @@ const ReporteTable = () => {
             const parsedFiltros = typeof filtros === 'string' ? JSON.parse(filtros) : filtros;
             return parsedFiltros.tipo?.toUpperCase() || 'N/A';
         } catch (error) {
-            console.error("Error parsing filtros:", error);
             return 'N/A';
         }
     };
@@ -78,7 +77,6 @@ const ReporteTable = () => {
                 const data = await getReportes();
                 setReportes(data);
             } catch (error) {
-                console.error("Error fetching reportes:", error);
             } finally {
                 setLoading(false);
             }

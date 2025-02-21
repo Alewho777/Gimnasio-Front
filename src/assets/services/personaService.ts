@@ -9,7 +9,6 @@ export const getPersonas = async (): Promise<Persona[]> => {
     const response = await axios.get<Persona[]>(API_ROUTES.PERSONAS);
     return response.data;
   } catch (error) {
-    console.error("Error fetching personas:", error);
     throw new Error("Error al obtener las personas");
   }
 };
@@ -89,11 +88,11 @@ export const actualizarPersonaPorCedula = async (cedula: string, persona: Omit<P
 
 export const getPersonasPorFecha = async (start: string, end: string): Promise<Persona[]> => {
   try {
-      const response = await axios.get<Persona[]>(API_ROUTES.PERSONAS_POR_FECHA, {
-          params: { start, end }
-      });
-      return response.data;
+    const response = await axios.get<Persona[]>(API_ROUTES.PERSONAS_POR_FECHA, {
+      params: { start, end }
+    });
+    return response.data;
   } catch (error) {
-      throw new Error("Error al obtener personas por fecha");
+    throw new Error("Error al obtener personas por fecha");
   }
 };

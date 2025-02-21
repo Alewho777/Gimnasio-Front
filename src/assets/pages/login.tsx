@@ -41,12 +41,10 @@ const Login = () => {
       const response = await login(credentials.username, credentials.contrasena);
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
-      console.log('ENVIADO...', credentials.contrasena, credentials.username);
       await getPersonas();
       navigate('/home');
     } catch (err) {
       toast.error('Usuario o Contraseña incorrectos');
-      console.log('ERROR EN ENVIAR', credentials.contrasena, credentials.username);
       setCredentials({ username: '', contrasena: '' });
     } finally {
       setLoading(false);

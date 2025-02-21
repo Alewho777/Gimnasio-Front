@@ -52,7 +52,6 @@ const Home = () => {
 
         setNumeroVentas(ventasMensual.length);
       } catch (error) {
-        console.error("Error al obtener los datos:", error);
         setNumeroPersonas(0);
         setNumeroProdcutos(0);
         setNumeroVentas(0);

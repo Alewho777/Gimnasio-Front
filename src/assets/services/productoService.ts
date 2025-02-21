@@ -9,7 +9,6 @@ export const getProductos = async (): Promise<Producto[]> => {
         const response = await axios.get<Producto[]>(API_ROUTES.PRODUCTOS);
         return response.data;
     } catch (error) {
-        console.error("Error fetching PRODUCTOS:", error);
         throw new Error("Error al obtener LOS PRODUCTOS");
     }
 };
