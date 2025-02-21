@@ -22,7 +22,7 @@ export const getProductoByCodigo = async (codigo: string | number): Promise<Prod
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
-                validateStatus: (status) => status === 200 || status === 404 // Permitir 404
+                validateStatus: (status) => status === 200 || status === 404
             }
         );
 
@@ -54,7 +54,6 @@ export const checkCodigoExists = async (codigo: string): Promise<boolean> => {
 export const createProducto = async (producto: Omit<Producto, 'id' | 'estado'>): Promise<Producto | null> => {
 
     try {
-        // Verificar si la cédula ya existe
         const exists = await checkCodigoExists(producto.codigo);
         if (exists) {
             toast.error("Codigo duplicado");

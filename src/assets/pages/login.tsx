@@ -45,7 +45,6 @@ const Login = () => {
       await getPersonas();
       navigate('/home');
     } catch (err) {
-      // setError('Credenciales inválidas');
       toast.error('Usuario o Contraseña incorrectos');
       console.log('ERROR EN ENVIAR', credentials.contrasena, credentials.username);
       setCredentials({ username: '', contrasena: '' });

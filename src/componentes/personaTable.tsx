@@ -68,42 +68,20 @@ const PersonaTable = () => {
     return hoy.isAfter(fechaFinDayjs) ? 2 : 1;
   };
 
-  // useEffect(() => {
-  //   const actualizarEstados = async () => {
-  //     const personasActualizadas = personas.map(persona => ({
-  //       ...persona,
-  //       estado_inscripcion: verificarEstadoInscripcion(persona.fecha_fin_Inscripcion)
-  //     }));
-
-  //     // Aquí deberías hacer un PATCH al backend para actualizar los estados
-  //     setPersonas(personasActualizadas);
-  //   };
-
-  //   actualizarEstados();
-  // }, []);
-
   useEffect(() => {
     const actualizarEstados = async () => {
-        try {
-            // 1. Actualizar estados en el backend
-            await axios.patch(API_ROUTES.ACTUALIZAR_ESTADOS_INSCRIPCION);
-            
-            // 2. Obtener datos actualizados
-            const dataActualizada = await getPersonas();
-            setPersonas(dataActualizada);
-        } catch (error) {
-            console.error("Error actualizando estados:", error);
-        }
+      try {
+        await axios.patch(API_ROUTES.ACTUALIZAR_ESTADOS_INSCRIPCION);
+
+        const dataActualizada = await getPersonas();
+        setPersonas(dataActualizada);
+      } catch (error) {
+        console.error("Error actualizando estados:", error);
+      }
     };
 
-    // Actualizar al montar el componente
     actualizarEstados();
-    
-    // Actualizar periódicamente cada hora
-    // const interval = setInterval(actualizarEstados, 3600000);
-    
-    // return () => clearInterval(interval);
-}, []);
+  }, []);
 
   useEffect(() => {
     if (selectedPersona?.fechaInscripcion) {
@@ -115,11 +93,8 @@ const PersonaTable = () => {
   }, [selectedPersona?.fechaInscripcion, selectedPersona?.tipoInscripcion]);
 
   const personasFiltradas = personas.filter(persona => {
-    // setLoading(true)
-    // Filtro por estado
     if (filtroEstado !== "todos" && persona.estado_inscripcion.toString() !== filtroEstado) return false;
 
-    // Filtro de búsqueda
     if (searchTerm && !(
       persona.cedula.includes(searchTerm) ||
       persona.nombres.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -128,9 +103,8 @@ const PersonaTable = () => {
       persona.suscripcion.toString().includes(searchTerm)
     )) return false;
 
-    // Filtro por fecha
     if (fechaFiltro) {
-      const mesSeleccionado = fechaFiltro.month(); // 0-11
+      const mesSeleccionado = fechaFiltro.month();
       const añoSeleccionado = fechaFiltro.year();
 
       const fechaInicio = dayjs(persona.fechaInscripcion);
@@ -160,7 +134,6 @@ const PersonaTable = () => {
         break;
       case "mensual":
         fecha.setMonth(fecha.getMonth() + 1);
-        // Ajustar día si el próximo mes tiene menos días
         if (fecha.getDate() !== new Date(fechaInicio).getDate()) {
           fecha.setDate(0);
         }
@@ -180,9 +153,7 @@ const PersonaTable = () => {
         if (Array.isArray(data)) {
           const personasActualizadas = data.map(p => ({
             ...p,
-            // estado_inscripcion: verificarEstadoInscripcion(p.fecha_fin_Inscripcion)
           }));
-          // const personasActivas = data.filter(personas => personas.estado === 1);
           setPersonas(personasActualizadas);
         } else {
           setError("Formato de datos inválido");
@@ -276,7 +247,6 @@ const PersonaTable = () => {
   return (
     <Card sx={{
       width: "90%",
-      // height: "clamp(80%, 40vw, 100rem)",
       height: "84vh",
       margin: "auto",
       alignItems: "center",
@@ -334,8 +304,6 @@ const PersonaTable = () => {
       <Divider />
 
       <TableContainer component={Paper} sx={{ height: "clamp(10vh, 56vh, 60vh)" }}>
-        {/* clamp(500px, 30vw, 100rem) */}
-
         <Toaster duration={2000} />
         <Table sx={{ minWidth: 650 }} aria-label="Tabla de personas" stickyHeader size="small">
           <TableHead>
@@ -459,7 +427,6 @@ const PersonaTable = () => {
               <Select
                 labelId="selectorTipo"
                 id="selector"
-                // value={selectedPersona?.tipoInscripcion || "mensual"}
                 required
                 label="Tipo de Inscripcion"
                 onChange={(e) =>

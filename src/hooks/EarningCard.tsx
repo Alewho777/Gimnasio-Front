@@ -12,7 +12,6 @@ interface StatCardProps {
     width: string;
     subtitle: string;
 }
-// "linear-gradient(135deg, #5A2DBE 30%, #7633D9 90%)"
 const StatCard = ({ title, value, icon, backgroundcolor, colorForent, iconColor, width, subtitle }: StatCardProps) => {
     return (
         <Card

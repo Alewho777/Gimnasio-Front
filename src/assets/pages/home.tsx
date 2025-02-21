@@ -6,10 +6,10 @@ import { getVentas } from '../services/ventasService';
 import StatCard from '../../hooks/EarningCard';
 import { Person as PersonaIcon, Inventory2, Storefront, EventAvailable, EventBusy } from '@mui/icons-material';
 import dayjs from 'dayjs';
-import fondoGYM from "../images/fondoGYM.jpg"
 
 const Home = () => {
 
+  const fondoGYM = "https://i.ibb.co/VWwTCvY9/fondoGYM.png"
 
   const [numeroPersonas, setNumeroPersonas] = useState(0);
   const [numeroProductos, setNumeroProdcutos] = useState(0);

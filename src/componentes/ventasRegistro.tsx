@@ -84,7 +84,6 @@ const VentasRegistro = () => {
     return (
         <Card sx={{
             width: "80%",
-            // height: "clamp(80%, 40vw, 100rem)",
             height: "84vh",
             margin: "auto",
             alignItems: "center",

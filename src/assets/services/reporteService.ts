@@ -16,12 +16,10 @@ export const getReportes = async (): Promise<Reporte[]> => {
 
 export const createReporte = async (reporteData: any): Promise<Reporte> => {
     try {
-        // Validar estructura básica
         if (!reporteData.tipo || !reporteData.fecha) {
             toast.warning('Datos incompletos...');
             throw new Error("Datos incompletos para generar el reporte");
         }
-        // const token = localStorage.getItem('token');
         const response = await axios.post<Reporte>(API_ROUTES.REPORTES, reporteData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

@@ -27,7 +27,6 @@ export const checkCedulaExists = async (cedula: string): Promise<boolean> => {
 export const createPersona = async (persona: Omit<Persona, 'id' | 'estado' | 'estado_inscripcion'>): Promise<Persona | null> => {
 
   try {
-    // Verificar si la cédula ya existe
     const exists = await checkCedulaExists(persona.cedula);
     if (exists) {
       toast.error("Cédula duplicada");
@@ -84,7 +83,7 @@ export const actualizarPersonaPorCedula = async (cedula: string, persona: Omit<P
       }
     );
   } catch (error) {
-    throw error; // Propagar el error para manejo local
+    throw error;
   }
 };
 

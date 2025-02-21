@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import logo from '../assets/images/logo.png'; // Asegúrate de tener tu logo en la ruta correcta
+import logo from '../assets/images/logo.png';
 import dayjs from 'dayjs';
 
 interface PdfConfig {
@@ -13,14 +13,11 @@ export const generarPDF = ({ reporte, logoUrl = logo }: PdfConfig) => {
     const margin = 10;
     let yPos = margin;
 
-    // Configuración inicial
     doc.setFont('helvetica');
     doc.setFontSize(12);
 
-    // Agregar logo
     doc.addImage(logoUrl, 'PNG', margin, yPos, 30, 30);
 
-    // Información de la empresa
     doc.setFontSize(10);
     doc.text('Gym & Fitnes', margin + 45, yPos + 5);
     doc.text('RUC: 12345678901', margin + 45, yPos + 10);
@@ -29,19 +26,16 @@ export const generarPDF = ({ reporte, logoUrl = logo }: PdfConfig) => {
 
     yPos += 30;
 
-    // Línea decorativa
     doc.setDrawColor(0);
     doc.setLineWidth(0.5);
     doc.line(margin, yPos, 200 - margin, yPos);
     yPos += 10;
 
-    // Encabezado del reporte
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     doc.text('REPORTE DE OPERACIONES', margin, yPos);
     yPos += 10;
 
-    // Detalles del reporte
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     const detalles = [
@@ -61,7 +55,6 @@ export const generarPDF = ({ reporte, logoUrl = logo }: PdfConfig) => {
 
     yPos = (doc as any).lastAutoTable.finalY + 10;
 
-    // Sección de personas inscritas
     if (reporte.personas) {
         doc.setFont('helvetica', 'bold');
         doc.text('PERSONAS INSCRITAS:', margin, yPos);
@@ -87,7 +80,6 @@ export const generarPDF = ({ reporte, logoUrl = logo }: PdfConfig) => {
         yPos = (doc as any).lastAutoTable.finalY + 10;
     }
 
-    // Sección de ventas
     if (reporte.ventas) {
         doc.setFont('helvetica', 'bold');
         doc.text('VENTAS REALIZADAS:', margin, yPos);
@@ -113,7 +105,6 @@ export const generarPDF = ({ reporte, logoUrl = logo }: PdfConfig) => {
         yPos = (doc as any).lastAutoTable.finalY + 10;
     }
 
-    // Resumen financiero
     const totalSuscripciones = JSON.parse(reporte.personas || '[]')
         .reduce((acc: number, p: any) => acc + p.suscripcion, 0);
 
@@ -135,7 +126,6 @@ export const generarPDF = ({ reporte, logoUrl = logo }: PdfConfig) => {
         margin: { left: margin, right: margin }
     });
 
-    // Pie de página
     const pageCount = doc.getNumberOfPages();
     for (let i = 1; i <= pageCount; i++) {
         doc.setPage(i);
@@ -147,6 +137,5 @@ export const generarPDF = ({ reporte, logoUrl = logo }: PdfConfig) => {
         );
     }
 
-    // Guardar PDF
     doc.save(`reporte_${reporte.numeroInforme}_${reporte.fechaGeneracion}.pdf`);
 };

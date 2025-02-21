@@ -45,8 +45,6 @@ const ProductoTable = () => {
   const [searchResults, setSearchResults] = useState<Producto[]>([]);
 
   const [buscarTabla, setBuscarTabla] = useState("");
-
-  // const handleOpen = () => setOpen(true);
   const handleOpen = (codigo: string) => {
     setProductoAEliminar(codigo);
     setOpen(true);
@@ -144,14 +142,11 @@ const ProductoTable = () => {
     }
     setVendiendo(true);
     try {
-      // Crear la venta
       await createVenta({
         producto: selectedProducto,
         cantidad: cantidad,
         total: total,
       });
-
-      // Actualizar stock localmente
       setProductos(prev => prev.map(p =>
         p.codigo === selectedProducto.codigo
           ? { ...p, stock: p.stock - cantidad }
@@ -182,14 +177,11 @@ const ProductoTable = () => {
       setSearchResults([]);
 
       if (!term.trim()) return;
-
-      // Si el término es numérico, buscar primero por código
       if (/^\d+$/.test(term)) {
         try {
           const producto = await getProductoByCodigo(term);
           setSearchResults([producto]);
         } catch (error) {
-          // Si no encuentra por código, buscar por nombre
           const productos = await getProductos();
           const filtered = productos.filter(p =>
             p.nombre.toLowerCase().includes(term.toLowerCase())
@@ -197,7 +189,6 @@ const ProductoTable = () => {
           setSearchResults(filtered);
         }
       } else {
-        // Búsqueda normal por nombre
         const productos = await getProductos();
         const filtered = productos.filter(p =>
           p.nombre.toLowerCase().includes(term.toLowerCase())
@@ -219,9 +210,6 @@ const ProductoTable = () => {
       producto.nombre.toLowerCase().includes(buscarTabla.toLowerCase()) ||
       producto.precio.toString().includes(buscarTabla) ||
       producto.stock.toString().includes(buscarTabla)
-      // producto.stock.toScring().includes(buscarTabla) ||
-      // producto.precio.toString().includes(buscarTabla)
-      // producto..toLowerCase().includes(searchTerm.toLowerCase())
     )) return false;
 
     return true;
@@ -230,7 +218,6 @@ const ProductoTable = () => {
   return (
     <Card sx={{
       width: "80%",
-      // height: "clamp(80%, 40vw, 100rem)",
       height: "84vh",
       margin: "auto",
       alignItems: "center",
@@ -394,9 +381,8 @@ const ProductoTable = () => {
             margin="normal"
             value={searchTerm}
             onChange={(e) => {
-              // Eliminar números al inicio y convertir a minúsculas
               const value = e.target.value
-                .replace(/^\d/, '') // Elimina números al inicio
+                .replace(/^\d/, '') 
                 .toLowerCase();
               setSearchTerm(value);
               handleSearch(value);

@@ -31,8 +31,8 @@ import { getCurrentUser, logout } from "../assets/services/authService";
 import logoGF from "../assets/images/logoGF.svg"
 
 
-const drawerWidth = 240; // Ancho del sidebar expandido
-const collapsedWidth = 70; // Ancho del sidebar colapsado
+const drawerWidth = 240;
+const collapsedWidth = 70;
 const user = getCurrentUser();
 
 
@@ -40,13 +40,8 @@ const navItems = [
   { title: "Inicio", path: "/home", icon: <HomeIcon />, Tooltip: "Inicio" },
   { title: "Gestion", path: "/personas", icon: <SupervisorAccount />, Tooltip: "Gestion de Clientes" },
   { title: "Inventario", path: "/productos", icon: <Inventory />, Tooltip: "Gestion de Inventario" },
-  // { title: "Ventas", path: "/ventas/gestion", icon: <PointOfSale />, Tooltip: "Gestion de Ventas" },
   { title: "Ventas", path: "/ventas", icon: <Analytics />, Tooltip: "Gestion de Informes y Ventas" },
 ];
-
-
-// const isSmallScreen = useMediaQuery("(max-width: 600px)");
-
 
 export default function Layout() {
   const [open, setOpen] = useState(true);
@@ -73,8 +68,6 @@ export default function Layout() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }} >
         <CssBaseline />
-
-        {/* AppBar (Barra Superior) */}
         <AppBar
           position="fixed"
           sx={{
