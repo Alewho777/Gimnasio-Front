@@ -9,7 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const theme = createTheme({
   typography: {
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: '"Poppins", Arial',
   },
   palette: {
     primary: {
