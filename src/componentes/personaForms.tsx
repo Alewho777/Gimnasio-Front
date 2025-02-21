@@ -229,7 +229,6 @@ const PersonaForm = () => {
                 onChange={(e) => setFormData({ ...formData, peso: e.target.value })}
 
                 slotProps={{ htmlInput: { step: "0.1", min: 1 } }}
-                required
                 fullWidth
                 variant="outlined"
               />
