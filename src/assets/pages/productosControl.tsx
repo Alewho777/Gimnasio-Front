@@ -2,10 +2,9 @@
 import { Link } from "react-router-dom";
 import { Button, Container, Typography, Box, Paper, Card, CardActions, CardContent, CardMedia, Grid2, Tooltip } from '@mui/material';
 import { ArrowForward } from "@mui/icons-material";
-
+import ProductosCreate from "../images/ProductosCreate.jpg";
+import ProductosGestion from "../images/productosGestion.jpg";
 const ProductosControl = () => {
-  const ProductosCreate = "https://i.ibb.co/6cG0CdD7/Productos-Create.png";
-  const ProductosGestion = "https://i.ibb.co/HDym5gQL/productos-Gestion.png";
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>

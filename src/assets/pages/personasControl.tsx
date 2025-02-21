@@ -2,10 +2,9 @@
 import { Link } from "react-router-dom";
 import { Button, Container, Typography, Box, Paper, Card, CardActions, CardContent, CardMedia, Grid2, Tooltip } from '@mui/material';
 import { ArrowForward } from "@mui/icons-material";
-
+import personasCreate from "../images/personasCreate.jpg";
+import personasGestion from "../images/personasGestion.jpg";
 const PersonasControl = () => {
-  const personasGestion = "https://i.ibb.co/nq9nz4Qk/personas-Gestion.png"
-  const personasCreate = "https://i.ibb.co/zWjxZVdR/personas-Create.png";
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>

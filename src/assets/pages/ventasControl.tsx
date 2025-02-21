@@ -2,10 +2,9 @@
 import { Link } from "react-router-dom";
 import { Button, Container, Typography, Box, Paper, Card, CardActions, CardContent, CardMedia, Grid2, Tooltip } from '@mui/material';
 import { ArrowForward } from "@mui/icons-material";
-
+import GimnasioReportes from "../images/gimnasioReportes.jpg";
+import HistorialVentas from "../images/historialVentas.jpg";
 const VentasControl = () => {
-  const GimnasioReportes = "https://i.ibb.co/mV03Pm1Q/gimnasio-Reportes.png";
-  const HistorialVentas = "https://i.ibb.co/21XMMWWX/historial-Ventas.png";
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
