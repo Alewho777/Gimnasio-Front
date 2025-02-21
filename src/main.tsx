@@ -7,8 +7,10 @@ import './config/axiosConfig';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-
 const theme = createTheme({
+  typography: {
+    fontFamily: "'Poppins', sans-serif",
+  },
   palette: {
     primary: {
       main: '#1976d2',
