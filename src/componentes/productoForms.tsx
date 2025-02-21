@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 
 const ProductoForm = () => {
-    // { onPersonaAdded }: { onPersonaAdded: () => void }
     const [formData, setFormData] = useState({
         codigo: "",
         nombre: "",
@@ -33,7 +32,6 @@ const ProductoForm = () => {
             const productoCreado = await createProducto(nuevoProducto);
 
             if (productoCreado) {
-                // onPersonaAdded();
                 setFormData({
                     codigo: "",
                     nombre: "",
@@ -51,10 +49,10 @@ const ProductoForm = () => {
     };
 
     const generarCodigoProducto = (nombre: string): string => {
-        if (!nombre) return ""; // Evitar errores si el nombre está vacío
-        const letras = nombre.substring(0, 4).toUpperCase().padEnd(4, "X"); // Tomar las primeras 4 letras y completar con "X" si son menos
-        const numero = Math.floor(Math.random() * 9999) + 1; // Número entre 1 y 9999
-        const numeroFormateado = numero.toString().padStart(4, "0"); // Convertirlo a 4 dígitos con ceros a la izquierda
+        if (!nombre) return ""; 
+        const letras = nombre.substring(0, 4).toUpperCase().padEnd(4, "X"); 
+        const numero = Math.floor(Math.random() * 9999) + 1;
+        const numeroFormateado = numero.toString().padStart(4, "0");
         return `${letras}${numeroFormateado}`;
     };
 
