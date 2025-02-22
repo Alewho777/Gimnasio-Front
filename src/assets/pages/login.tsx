@@ -37,11 +37,11 @@ const Login = () => {
     setError('');
     setLoading(true);
     try {
-      toast.success('Inicio de sesion EXITOSO!');
       const response = await login(credentials.username, credentials.contrasena);
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
       await getPersonas();
+      toast.success('Inicio de sesion EXITOSO!');
       navigate('/home');
     } catch (err) {
       toast.error('Usuario o Contraseña incorrectos');

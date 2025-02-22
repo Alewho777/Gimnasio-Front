@@ -267,7 +267,7 @@ const PersonaTable = () => {
           sx={{ width: 300 }}
         />
 
-        <FormControl sx={{ width: 200 }}>
+        <FormControl sx={{ width: 300 }}>
           <InputLabel>Estado</InputLabel>
           <Select
             value={filtroEstado}
@@ -289,7 +289,7 @@ const PersonaTable = () => {
             onChange={(newValue) => setFechaFiltro(newValue)}
             slotProps={{
               textField: {
-                sx: { width: 200 }
+                sx: { width: 300 }
               }
             }}
           />
@@ -375,6 +375,8 @@ const PersonaTable = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
+            overflowY: "scroll",
+            height: '80vh',
             width: '40vw',
             bgcolor: 'background.paper',
             boxShadow: 24,

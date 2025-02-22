@@ -175,7 +175,7 @@ const ReporteTable = () => {
                     variant="outlined"
                     sx={{ mt: 2, marginBottom: '10px', marginRight: '10px' }}>Regresar</Button>
             </Tooltip>
-            <Box sx={{ display: 'flex', gap: 2, p: 2 }}>
+            <Box sx={{ display: 'flex', gap: 2, mb: 2, flexWrap: 'wrap'  }}>
 
                 <TextField
                     label="Buscar reportes..."
