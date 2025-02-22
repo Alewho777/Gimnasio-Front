@@ -454,23 +454,41 @@ const PersonaTable = () => {
             />
             <TextField
               label="Peso (kg)"
-              type="number"
+              type="text"
               value={selectedPersona?.peso || ""}
-              slotProps={{ htmlInput: { min: 1, maxLength: 5 } }}
+              slotProps={{ htmlInput: { inputMode: "decimal" } }}
               fullWidth
               required
               margin="normal"
-              onChange={(e) => setSelectedPersona({ ...selectedPersona, peso: e.target.value })}
+              onChange={(e) => {
+                let value = e.target.value.replace(",", "."); 
+                value = value.replace(/[^0-9.]/g, ""); 
+                const parts = value.split(".");
+                if (parts.length > 2) {
+                  value = parts[0] + "." + parts.slice(1).join("");
+                }
+          
+                setSelectedPersona({ ...selectedPersona, peso: value });
+              }}
             />
             <TextField
               label="Suscripción"
-              type="number"
+              type="text"
               value={selectedPersona?.suscripcion || ""}
-              slotProps={{ htmlInput: { min: 1, maxLength: 5 } }}
+              slotProps={{ htmlInput: { inputMode: "decimal" } }}
               fullWidth
               required
               margin="normal"
-              onChange={(e) => setSelectedPersona({ ...selectedPersona, suscripcion: e.target.value })}
+              onChange={(e) => {
+                let value = e.target.value.replace(",", ".");
+                value = value.replace(/[^0-9.]/g, "");
+                const parts = value.split(".");
+                if (parts.length > 2) {
+                  value = parts[0] + "." + parts.slice(1).join("");
+                }
+          
+                setSelectedPersona({ ...selectedPersona, suscripcion: value });
+              }}
             />
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label" sx={{ color: "rgb(102, 102, 102)" }}>Genero</FormLabel>

@@ -425,13 +425,10 @@ const ReporteTable = () => {
                                     <TableContainer component={Paper}>
                                         <Table size="small">
                                             <TableBody>
-                                                {/* Filas de ganancias */}
                                                 <TableRow>
                                                     <TableCell><strong>Tipo</strong></TableCell>
                                                     <TableCell><strong>Ganancias</strong></TableCell>
                                                 </TableRow>
-
-                                                {/* Ganancias de Personas */}
                                                 <TableRow>
                                                     <TableCell>Ganancias de suscripciones</TableCell>
                                                     <TableCell>
@@ -440,8 +437,6 @@ const ReporteTable = () => {
                                                             .toFixed(2)}
                                                     </TableCell>
                                                 </TableRow>
-
-                                                {/* Ganancias de Productos */}
                                                 <TableRow>
                                                     <TableCell>Ganancias de ventas</TableCell>
                                                     <TableCell>
@@ -450,8 +445,6 @@ const ReporteTable = () => {
                                                             .toFixed(2)}
                                                     </TableCell>
                                                 </TableRow>
-
-                                                {/* Total General */}
                                                 <TableRow sx={{ '& td': { borderBottom: 'none' } }}>
                                                     <TableCell colSpan={1} align="right"><strong>Total</strong></TableCell>
                                                     <TableCell>

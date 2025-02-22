@@ -222,13 +222,21 @@ const PersonaForm = () => {
             </Grid2>
             <Grid2>
               <TextField
-                type="number"
+                type="text"
                 name="peso"
                 label="Peso (kg)"
                 value={formData.peso}
-                onChange={(e) => setFormData({ ...formData, peso: e.target.value })}
-
-                slotProps={{ htmlInput: { step: "0.1", min: 1 } }}
+                onChange={(e) => {
+                  let value = e.target.value.replace(",", ".");
+                  value = value.replace(/[^0-9.]/g, "");
+                  const parts = value.split(".");
+                  if (parts.length > 2) {
+                    value = parts[0] + "." + parts.slice(1).join("");
+                  }
+            
+                  setFormData({ ...formData, peso: value });
+                }}
+                slotProps={{ htmlInput: { inputMode: "decimal" } }}
                 fullWidth
                 variant="outlined"
               />
@@ -236,13 +244,22 @@ const PersonaForm = () => {
             </Grid2>
             <Grid2>
               <TextField
-                type="number"
+                type="text"
                 name="suscripcion"
                 label="Pago"
                 value={formData.suscripcion}
-                onChange={(e) => setFormData({ ...formData, suscripcion: e.target.value })}
+                onChange={(e) => {
+                  let value = e.target.value.replace(",", "."); 
+                  value = value.replace(/[^0-9.]/g, ""); 
+                  const parts = value.split(".");
+                  if (parts.length > 2) {
+                    value = parts[0] + "." + parts.slice(1).join("");
+                  }
+            
+                  setFormData({ ...formData, suscripcion: value });
+                }}
 
-                slotProps={{ htmlInput: { step: "0.1", min: 1 } }}
+                slotProps={{ htmlInput: { inputMode: "decimal" } }}
                 required
                 fullWidth
                 variant="outlined"

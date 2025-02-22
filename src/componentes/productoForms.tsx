@@ -43,14 +43,14 @@ const ProductoForm = () => {
         } catch (err) {
             setError("Error al registrar el producto");
             toast.error("Error...");
-        }finally{
+        } finally {
             setLoading(false);
         }
     };
 
     const generarCodigoProducto = (nombre: string): string => {
-        if (!nombre) return ""; 
-        const letras = nombre.substring(0, 4).toUpperCase().padEnd(4, "X"); 
+        if (!nombre) return "";
+        const letras = nombre.substring(0, 4).toUpperCase().padEnd(4, "X");
         const numero = Math.floor(Math.random() * 9999) + 1;
         const numeroFormateado = numero.toString().padStart(4, "0");
         return `${letras}${numeroFormateado}`;
@@ -73,16 +73,16 @@ const ProductoForm = () => {
                     <Grid2 container spacing={2} display={"grid"} gridTemplateColumns={"repeat(1  , minmax(200px, 1fr))"} width={"100%"}  >
 
                         <Grid2 >
-                            <Tooltip title= "El código se genera automáticamente" arrow placement="top" followCursor>
-                            <TextField
-                                name="codigo"
-                                label="Código"
-                                fullWidth
-                                value={formData.codigo}
-                                onChange={(e) => setFormData({ ...formData, codigo: e.target.value })}
-                                disabled
-                                variant="outlined"
-                            />
+                            <Tooltip title="El código se genera automáticamente" arrow placement="top" followCursor>
+                                <TextField
+                                    name="codigo"
+                                    label="Código"
+                                    fullWidth
+                                    value={formData.codigo}
+                                    onChange={(e) => setFormData({ ...formData, codigo: e.target.value })}
+                                    disabled
+                                    variant="outlined"
+                                />
                             </Tooltip>
                         </Grid2>
                         <Grid2 >
@@ -99,12 +99,15 @@ const ProductoForm = () => {
 
                         <Grid2 >
                             <TextField
-                                type="number"
+                                type="text"
                                 name="stock"
                                 label="Stock"
                                 value={formData.stock}
-                                onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                                slotProps={{htmlInput:{step:"0.1", min:1}}}
+                                onChange={(e) => {
+                                    let value = e.target.value.replace(/\D/g, "");
+                                    setFormData({ ...formData, stock: value });
+                                }}
+                                slotProps={{ htmlInput: { inputMode: "numeric", } }}
                                 required
                                 fullWidth
                                 variant="outlined"
@@ -112,12 +115,21 @@ const ProductoForm = () => {
                         </Grid2>
                         <Grid2>
                             <TextField
-                                type="number"
+                                type="text"
                                 name="precio"
                                 label="Precio"
                                 value={formData.precio}
-                                onChange={(e) => setFormData({ ...formData, precio: e.target.value })}
-                                slotProps={{htmlInput:{step:"0.1", min:0.1}}}
+                                onChange={(e) => {
+                                    let value = e.target.value.replace(",", ".");
+                                    value = value.replace(/[^0-9.]/g, "");
+                                    const parts = value.split(".");
+                                    if (parts.length > 2) {
+                                        value = parts[0] + "." + parts.slice(1).join("");
+                                    }
+
+                                    setFormData({ ...formData, precio: value });
+                                }}
+                                slotProps={{ htmlInput: { inputMode: "decimal" } }}
                                 required
                                 fullWidth
                                 variant="outlined"
@@ -134,9 +146,9 @@ const ProductoForm = () => {
                                     variant="contained"
                                     size="large"
                                     endIcon={loading && <AddBusiness />}
-                                    disabled= {loading}
+                                    disabled={loading}
                                 >
-                                    {loading ? <CircularProgress size={25} color="inherit"/>:'Registrar'}
+                                    {loading ? <CircularProgress size={25} color="inherit" /> : 'Registrar'}
                                 </Button>
                             </Tooltip>
                             <Tooltip title="Regresar a la pagina anterior" arrow placement="bottom">

@@ -323,19 +323,31 @@ const ProductoTable = () => {
             />
             <TextField
               label="Stock"
-              type="number"
+              type="text"
               value={selectedProducto?.stock || ""}
               fullWidth
               margin="normal"
-              onChange={(e) => setSelectedProducto({ ...selectedProducto, stock: e.target.value })}
+              onChange={(e) => {
+                let value = e.target.value.replace(/\D/g, "");
+                setSelectedProducto({ ...selectedProducto, stock: value });
+            }}
             />
             <TextField
               label="Precio"
-              type="number"
+              type="text"
               value={selectedProducto?.precio || ""}
               fullWidth
               margin="normal"
-              onChange={(e) => setSelectedProducto({ ...selectedProducto, precio: e.target.value })}
+              onChange={(e) => {
+                let value = e.target.value.replace(",", ".");
+                value = value.replace(/[^0-9.]/g, "");
+                const parts = value.split(".");
+                if (parts.length > 2) {
+                  value = parts[0] + "." + parts.slice(1).join("");
+                }
+          
+                setSelectedProducto({ ...selectedProducto, precio: value });
+              }}
             />
 
             <Box display="flex" justifyContent="end" gap={2} mt={2}>
@@ -440,8 +452,10 @@ const ProductoTable = () => {
                 value={cantidad}
                 onChange={(e) => {
                   const maxStock = selectedProducto.stock;
-                  const value = Math.min(Math.max(1, parseInt(e.target.value)), maxStock);
-                  setCantidad(value || 1);
+                  let value = e.target.value.replace(/\D/g, ""); 
+                  let intValue = parseInt(value, 10);
+                  intValue = Math.min(Math.max(1, intValue || 1), maxStock);
+                  setCantidad(intValue || 1);
                 }}
 
                 slotProps={{ htmlInput: { min: 1, max: selectedProducto.stock } }}

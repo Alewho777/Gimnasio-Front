@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container, Grid2, Typography } from '@mui/material';
+import { Box, CircularProgress, Container, Grid2, Tooltip, Typography } from '@mui/material';
 import { getPersonas } from '../services/personaService';
 import { useEffect, useState } from 'react';
 import { getProductos } from '../services/productoService';
@@ -131,40 +131,49 @@ const Home = () => {
           </Typography>
         </Grid2>
         <Grid2 display={'flex'} flexWrap={'wrap'} columnGap={10} rowGap={3}>
+          <Tooltip title="Ver GESTIÓN DE PERSONAS para mas información" arrow placement="top" followCursor>
+            <Box>
+              <StatCard
+                backgroundcolor='linear-gradient(135deg,rgb(45, 74, 190) 30%,rgb(51, 101, 217) 90%)'
+                title='Personas'
+                value={loading ? <CircularProgress size={24} color="inherit" /> : numeroPersonas}
+                icon={<PersonaIcon />}
+                colorForent='#fff'
+                iconColor='rgba(255, 255, 255, 0.2)'
+                width='320px'
+                subtitle='Clientes registrados'
+              />
+            </Box>
+          </Tooltip>
 
-          <StatCard
-            backgroundcolor='linear-gradient(135deg,rgb(45, 74, 190) 30%,rgb(51, 101, 217) 90%)'
-            title='Personas'
-            value={loading ? <CircularProgress size={24} color="inherit" /> : numeroPersonas}
-            icon={<PersonaIcon />}
-            colorForent='#fff'
-            iconColor='rgba(255, 255, 255, 0.2)'
-            width='320px'
-            subtitle='Clientes registrados'
-          />
-
-
-
-          <StatCard
-            backgroundcolor='linear-gradient(135deg, rgb(45, 190, 69) 30%,rgb(51, 217, 62) 90%)'
-            title='Inscripciones'
-            value={loading ? <CircularProgress size={24} color="inherit" /> : personasInscritas}
-            icon={<EventAvailable />}
-            colorForent='#fff'
-            iconColor='rgba(255, 255, 255, 0.2)'
-            width='320px'
-            subtitle='Inscripciones activas'
-          />
-          <StatCard
-            backgroundcolor='linear-gradient(135deg, rgb(190, 45, 45) 30%,rgb(217, 51, 51) 90%)'
-            title='Inscripciones'
-            value={loading ? <CircularProgress size={24} color="inherit" /> : personasNoInscritas}
-            icon={<EventBusy />}
-            colorForent='#fff'
-            iconColor='rgba(255, 255, 255, 0.2)'
-            width='320px'
-            subtitle='Inscripciones caducadas'
-          />
+          <Tooltip title="Ver GESTIÓN DE PERSONAS para mas información" arrow placement="top" followCursor>
+            <Box>
+              <StatCard
+                backgroundcolor='linear-gradient(135deg, rgb(45, 190, 69) 30%,rgb(51, 217, 62) 90%)'
+                title='Inscripciones'
+                value={loading ? <CircularProgress size={24} color="inherit" /> : personasInscritas}
+                icon={<EventAvailable />}
+                colorForent='#fff'
+                iconColor='rgba(255, 255, 255, 0.2)'
+                width='320px'
+                subtitle='Inscripciones activas'
+              />
+            </Box>
+          </Tooltip>
+          <Tooltip title="Ver GESTIÓN DE PERSONAS para mas información" arrow placement="top" followCursor>
+            <Box>
+              <StatCard
+                backgroundcolor='linear-gradient(135deg, rgb(190, 45, 45) 30%,rgb(217, 51, 51) 90%)'
+                title='Inscripciones'
+                value={loading ? <CircularProgress size={24} color="inherit" /> : personasNoInscritas}
+                icon={<EventBusy />}
+                colorForent='#fff'
+                iconColor='rgba(255, 255, 255, 0.2)'
+                width='320px'
+                subtitle='Inscripciones caducadas'
+              />
+            </Box>
+          </Tooltip>
         </Grid2>
         <Grid2 display={'flex'}>
           <Typography fontSize={'clamp(1.5rem, 2.5vw, 3rem)'}>
@@ -172,28 +181,34 @@ const Home = () => {
           </Typography>
         </Grid2>
         <Grid2 display={'flex'} flexWrap='wrap' columnGap={10} rowGap={3}>
-
-          <StatCard
-            backgroundcolor='linear-gradient(135deg, rgb(90, 45, 190) 30%, #7633D9 90%)'
-            title='Productos'
-            value={loading ? <CircularProgress size={24} color="inherit" /> : numeroProductos}
-            icon={<Inventory2 />}
-            colorForent='#fff'
-            iconColor='rgba(255, 255, 255, 0.2)'
-            width='320px'
-            subtitle='Cantidad de productos actuales'
-          />
-
-          <StatCard
-            backgroundcolor='linear-gradient(135deg,rgb(45, 190, 190) 30%,rgb(51, 206, 217) 90%)'
-            title='Ventas'
-            value={loading ? <CircularProgress size={24} color="inherit" /> : numeroVentas}
-            icon={<Storefront />}
-            colorForent='#fff'
-            iconColor='rgba(255, 255, 255, 0.2)'
-            width='320px'
-            subtitle='Ventas de este mes'
-          />
+          <Tooltip title="Ver GESTIÓN DE PRODUCTOS para mas información" arrow placement="top" followCursor>
+            <Box>
+              <StatCard
+                backgroundcolor='linear-gradient(135deg, rgb(90, 45, 190) 30%, #7633D9 90%)'
+                title='Productos'
+                value={loading ? <CircularProgress size={24} color="inherit" /> : numeroProductos}
+                icon={<Inventory2 />}
+                colorForent='#fff'
+                iconColor='rgba(255, 255, 255, 0.2)'
+                width='320px'
+                subtitle='Cantidad de productos actuales'
+              />
+            </Box>
+          </Tooltip>
+          <Tooltip title="Ver GESTIÓN DE VENTAS para mas información" arrow placement="top" followCursor>
+            <Box>
+            <StatCard
+              backgroundcolor='linear-gradient(135deg,rgb(45, 190, 190) 30%,rgb(51, 206, 217) 90%)'
+              title='Ventas'
+              value={loading ? <CircularProgress size={24} color="inherit" /> : numeroVentas}
+              icon={<Storefront />}
+              colorForent='#fff'
+              iconColor='rgba(255, 255, 255, 0.2)'
+              width='320px'
+              subtitle='Ventas de este mes'
+            />
+            </Box>
+            </Tooltip>
         </Grid2>
       </Grid2>
     </Container>
