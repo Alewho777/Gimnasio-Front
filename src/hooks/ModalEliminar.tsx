@@ -11,7 +11,7 @@ interface ModalEliminarProps {
 
 const ModalEliminar: React.FC<ModalEliminarProps> = ({ open, onClose, onConfirm, itemName, isloading }) => {
     return (
-        <Modal open={open} onClose={(reason) => {
+        <Modal open={open} onClose={(event,reason) => {
             if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
                 onClose();
             }

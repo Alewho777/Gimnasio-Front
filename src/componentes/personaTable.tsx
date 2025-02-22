@@ -365,7 +365,7 @@ const PersonaTable = () => {
               )}
           </TableBody>
         </Table>
-        <Modal open={openEdit} onClose={(reason) => {
+        <Modal open={openEdit} onClose={(event,reason) => {
           if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
             setOpenEdit(false);
           }
@@ -378,6 +378,8 @@ const PersonaTable = () => {
             overflowY: "scroll",
             height: '80vh',
             width: '40vw',
+            minWidth : '300px',
+            borderRadius: 2,
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,

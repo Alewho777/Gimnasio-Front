@@ -262,7 +262,7 @@ const ReporteTable = () => {
                 </Table>
             </TableContainer>
 
-            <Modal open={openModal} onClose={(reason) => {
+            <Modal open={openModal} onClose={(event,reason) => {
                 if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
                     setOpenModal(false);
                 }

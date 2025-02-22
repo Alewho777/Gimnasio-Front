@@ -290,7 +290,7 @@ const ProductoTable = () => {
               )}
           </TableBody>
         </Table>
-        <Modal open={openEdit} onClose={(reason) => {
+        <Modal open={openEdit} onClose={(event,reason) => {
                 if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
                     setOpenEdit(false);
                 }
@@ -300,11 +300,13 @@ const ProductoTable = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            overflowY: "scroll",
+            width: '40vw',
             minWidth: '300px',
             bgcolor: 'background.paper',
             boxShadow: 24,
-            p: 4
+            p: 4,
+            borderRadius: 2
           }}>
             <Typography variant="h6">Editar Producto</Typography>
             <TextField
@@ -366,7 +368,7 @@ const ProductoTable = () => {
 
       </TableContainer>
 
-      <Modal open={openVenta} onClose={(reason) => {
+      <Modal open={openVenta} onClose={(event,reason) => {
         if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
           setOpenVenta(false);
         }
