@@ -124,7 +124,7 @@ const PersonaForm = () => {
         margin: "auto",
         alignItems: "center"
       }}>
-        <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'}>REGISTRO DE CLIENTES</Typography>
+        <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} sx={{cursor: 'default'}}>REGISTRO DE CLIENTES</Typography>
         <Tooltip title="Regresar a la pagina anterior" arrow placement="bottom">
           <Button size="small" component={Link}
             to="/personas"
