@@ -221,7 +221,7 @@ const ProductoTable = () => {
       alignItems: "center",
 
     }}>
-      <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} display={"flex"} justifyContent={"center"}>GESTION DE PRODUCTOS</Typography>
+      <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} display={"flex"} justifyContent={"center"} sx={{ cursor: 'default' }}>GESTION DE PRODUCTOS</Typography>
       <Tooltip title="Regresar a la pagina anterior" arrow placement="top">
         <Button size="small" component={Link}
           to="/productos"
@@ -244,7 +244,7 @@ const ProductoTable = () => {
       </Box>
       <Divider />
 
-      <TableContainer component={Paper} sx={{ height: "clamp(10vh, 56vh, 60vh)" }}>
+      <TableContainer component={Paper} sx={{ height: "clamp(10vh, 56vh, 60vh)", cursor: 'default' }}>
 
         <Toaster duration={2000} />
         <Table sx={{ minWidth: 650 }} aria-label="Tabla de productos" stickyHeader size="small">
@@ -274,7 +274,6 @@ const ProductoTable = () => {
                     <TableCell align="center" >{producto.stock}</TableCell>
                     <TableCell align="center">${producto.precio}</TableCell>
 
-                    {/* <TableCell > <IconButton onClick={() => handleEliminarPersona(persona.cedula)}><DeleteIcon /></IconButton></TableCell> */}
                     <TableCell align="center">
                       <Tooltip title="Eliminar datos" arrow placement="top">
                         <IconButton color="error" onClick={() => handleOpen(producto.codigo)}><DeleteIcon /></IconButton>
@@ -283,18 +282,18 @@ const ProductoTable = () => {
                         <IconButton color="warning" onClick={() => handleEditClick(producto)}><EditIcon /></IconButton>
                       </Tooltip>
 
-                      
+
                     </TableCell>
                   </TableRow>
                 ))
               )}
           </TableBody>
         </Table>
-        <Modal open={openEdit} onClose={(event,reason) => {
-                if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
-                    setOpenEdit(false);
-                }
-            }} disableEscapeKeyDown>
+        <Modal open={openEdit} onClose={(_event, reason) => {
+          if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+            setOpenEdit(false);
+          }
+        }} disableEscapeKeyDown>
           <Box sx={{
             position: 'absolute',
             top: '50%',
@@ -308,7 +307,7 @@ const ProductoTable = () => {
             p: 4,
             borderRadius: 2
           }}>
-            <Typography variant="h6">Editar Producto</Typography>
+            <Typography variant="h6" sx={{cursor: 'default'}}>Editar Producto</Typography>
             <TextField
               label="Código"
               value={selectedProducto?.codigo || ""}
@@ -332,7 +331,7 @@ const ProductoTable = () => {
               onChange={(e) => {
                 let value = e.target.value.replace(/\D/g, "");
                 setSelectedProducto({ ...selectedProducto, stock: value });
-            }}
+              }}
             />
             <TextField
               label="Precio"
@@ -347,7 +346,7 @@ const ProductoTable = () => {
                 if (parts.length > 2) {
                   value = parts[0] + "." + parts.slice(1).join("");
                 }
-          
+
                 setSelectedProducto({ ...selectedProducto, precio: value });
               }}
             />
@@ -368,7 +367,7 @@ const ProductoTable = () => {
 
       </TableContainer>
 
-      <Modal open={openVenta} onClose={(event,reason) => {
+      <Modal open={openVenta} onClose={(_event, reason) => {
         if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
           setOpenVenta(false);
         }
@@ -386,7 +385,7 @@ const ProductoTable = () => {
           boxShadow: 24,
           borderRadius: 2
         }}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{cursor: 'default'}}>
             Registrar Venta
           </Typography>
 
@@ -397,7 +396,7 @@ const ProductoTable = () => {
             value={searchTerm}
             onChange={(e) => {
               const value = e.target.value
-                .replace(/^\d/, '') 
+                .replace(/^\d/, '')
                 .toLowerCase();
               setSearchTerm(value);
               handleSearch(value);
@@ -454,7 +453,7 @@ const ProductoTable = () => {
                 value={cantidad}
                 onChange={(e) => {
                   const maxStock = selectedProducto.stock;
-                  let value = e.target.value.replace(/\D/g, ""); 
+                  let value = e.target.value.replace(/\D/g, "");
                   let intValue = parseInt(value, 10);
                   intValue = Math.min(Math.max(1, intValue || 1), maxStock);
                   setCantidad(intValue || 1);
@@ -462,7 +461,7 @@ const ProductoTable = () => {
 
                 slotProps={{ htmlInput: { min: 1, max: selectedProducto.stock } }}
               />
-              <Typography variant="h6" sx={{ mt: 2 }}>
+              <Typography variant="h6" sx={{ mt: 2 }} style={{cursor: 'default'}}>
                 Total: ${(selectedProducto.precio * cantidad).toFixed(2)}
               </Typography>
             </Box>
@@ -490,12 +489,12 @@ const ProductoTable = () => {
         </Box>
       </Modal>
       <ModalEliminar
-                        isloading={eliminando}
-                        open={open}
-                        onClose={() => setOpen(false)}
-                        onConfirm={() => productoAEliminar && handleEliminarProducto(productoAEliminar)}
-                        itemName="esta persona"
-                      />
+        isloading={eliminando}
+        open={open}
+        onClose={() => setOpen(false)}
+        onConfirm={() => productoAEliminar && handleEliminarProducto(productoAEliminar)}
+        itemName="esta persona"
+      />
     </Card>
   );
 };

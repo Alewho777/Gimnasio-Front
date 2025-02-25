@@ -9,7 +9,7 @@ const VentasControl = () => {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h3" component="h1" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}>
+        <Typography variant="h3" component="h1" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', cursor: 'default' }}>
           Gestión de Informes y Ventas
         </Typography>
       </Box>
@@ -31,7 +31,7 @@ const VentasControl = () => {
               image={GimnasioReportes}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" sx={{cursor: 'default'}}>
                 Registro
               </Typography>
             </CardContent>
@@ -61,7 +61,7 @@ const VentasControl = () => {
               image={HistorialVentas}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" sx={{cursor: 'default'}}>
                 Gestion
               </Typography>
             </CardContent>

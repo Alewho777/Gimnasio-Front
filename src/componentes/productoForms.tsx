@@ -66,7 +66,7 @@ const ProductoForm = () => {
                 margin: "auto",
                 alignItems: "center"
             }}>
-                <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'}>REGISTRO DE PRODUCTOS</Typography>
+                <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} sx={{cursor: 'default'}}>REGISTRO DE PRODUCTOS</Typography>
                 <Divider />
 
                 <CardContent >

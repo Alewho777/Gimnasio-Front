@@ -50,6 +50,7 @@ const ReporteTable = () => {
     const [buscarTabla, setBuscarTabla] = useState("");
     const [filtroEstado, setFiltroEstado] = useState<"todos" | "dia" | "mes" | "año">("todos");
     const [isLoadingGenerando, setIsLoadingGenerando] = useState(false);
+    const [filtroEstadoBorrado, _setFiltroEstadoBorrado] = useState<"todos" | "1" | "2">("1");
 
     const handleOpen = (id: number) => {
         setReporteAEliminar(id);
@@ -153,6 +154,7 @@ const ReporteTable = () => {
     };
 
     const reportesFiltrados = reportes.filter(reporte => {
+    if (filtroEstadoBorrado !== "todos" && reporte.estado.toString() !== filtroEstadoBorrado) return false;
         const filtrosAplicados = reporte.filtrosAplicados ? JSON.parse(reporte.filtrosAplicados) : {};
         if (filtroEstado !== "todos" && filtrosAplicados.tipo !== filtroEstado) return false;
 
@@ -168,7 +170,7 @@ const ReporteTable = () => {
         <Card sx={{ width: "90%", height: "84vh", margin: "auto" }}>
             <Toaster duration={2000} />
 
-            <Typography variant="h4" textAlign="center" py={2}>Reportes</Typography>
+            <Typography variant="h4" textAlign="center" py={2} sx={{cursor: 'default'}}>Reportes</Typography>
             <Tooltip title="Regresar a la pagina anterior" arrow placement="top">
                 <Button size="small" component={Link}
                     to="/ventas"
@@ -189,7 +191,7 @@ const ReporteTable = () => {
                     <Select
                         value={filtroEstado}
                         onChange={(e) => setFiltroEstado(e.target.value as any)}
-                        label="Estado"
+                        label="Tipo de reporte"
                     >
                         <MenuItem value="todos">Todos</MenuItem>
                         <MenuItem value="dia">Día</MenuItem>
@@ -207,7 +209,7 @@ const ReporteTable = () => {
                 </Tooltip>
             </Box>
 
-            <TableContainer component={Paper} sx={{ height: "54vh" }}>
+            <TableContainer component={Paper} sx={{ height: "54vh",cursor: 'default' }}>
                 <Table stickyHeader size="small">
                     <TableHead>
                         <TableRow>
@@ -262,7 +264,7 @@ const ReporteTable = () => {
                 </Table>
             </TableContainer>
 
-            <Modal open={openModal} onClose={(event,reason) => {
+            <Modal open={openModal} onClose={(_event,reason) => {
                 if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
                     setOpenModal(false);
                 }
@@ -279,7 +281,7 @@ const ReporteTable = () => {
                     p: 4,
                     borderRadius: 2
                 }}>
-                    <Typography variant="h6" mb={2}>Generar Nuevo Reporte</Typography>
+                    <Typography variant="h6" mb={2} sx={{cursor: 'default'}}>Generar Nuevo Reporte</Typography>
 
                     <FormControl fullWidth sx={{ mb: 2 }}>
                         <InputLabel>Tipo de Reporte</InputLabel>

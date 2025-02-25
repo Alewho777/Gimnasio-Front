@@ -17,23 +17,29 @@ import {
     Divider,
     Button,
     Tooltip,
+    Modal,
 } from '@mui/material';
-import { Close as CloseIcon } from "@mui/icons-material";
-import {Toaster } from "mui-sonner";
+import { Close as CloseIcon, Edit as EditIcon } from "@mui/icons-material";
+import { toast, Toaster } from "mui-sonner";
 
 import { Link } from "react-router-dom";
-import { getVentas } from "../assets/services/ventasService";
+import { actualizarVenta, getVentas } from "../assets/services/ventasService";
 
 import dayjs, { Dayjs } from "dayjs";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
- 
+
 const VentasRegistro = () => {
     const [ventas, setVentas] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
     const [fechaFiltro, setFechaFiltro] = useState<Dayjs | null>(null);
+    const [selectedVenta, setSelectedVenta] = useState<any | null>(null);
+    const [openEdit, setOpenEdit] = useState(false);
+    const [actualozando, setActualozando] = useState(false);
+    const [cantidad, setCantidad] = useState(1);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,6 +59,15 @@ const VentasRegistro = () => {
         };
         fetchData();
     }, []);
+
+    const handleEditClick = (venta: any) => {
+        setSelectedVenta({
+            ...venta,
+            producto: venta.producto || { precio: 0 }
+        });
+        setCantidad(venta.cantidad);
+        setOpenEdit(true);
+    };
 
     const ventasFiltradas = ventas.filter(venta => {
         if (searchTerm && !(
@@ -74,6 +89,33 @@ const VentasRegistro = () => {
         return true;
     });
 
+    const handleUpdateVenta = async () => {
+        if (!selectedVenta) return;
+        setActualozando(true);
+        try {
+            await actualizarVenta(selectedVenta.id, {
+                cantidad: cantidad,
+                total: selectedVenta.producto.precio * cantidad,
+            });
+            toast.success(`Venta actualizada con éxito`);
+            // setSelectedVenta(false);
+            setVentas(ventas.map(p =>
+                p.id === selectedVenta.id ?
+                    { ...selectedVenta, cantidad, total: selectedVenta.producto.precio * cantidad } : p
+            ));
+            setOpenEdit(false);
+        } catch (error: any) {
+            toast.error("Error al actualizar los datos de la venta");
+            if (error.response?.status === 401) {
+                toast.error("Sesión expirada - Por favor vuelva a iniciar sesión");
+            } else {
+                toast.error(`Error al actualizar: ${error.response?.data?.message || error.message}`);
+            }
+        } finally {
+            setActualozando(false);
+        }
+    };
+
     if (error) return (
         <Alert severity="error" sx={{ my: 2 }}>
             {error}
@@ -89,13 +131,13 @@ const VentasRegistro = () => {
             alignItems: "center",
 
         }}>
-            <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} display={"flex"} justifyContent={"center"}>Historial de Ventas</Typography>
+            <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} display={"flex"} justifyContent={"center"} sx={{ cursor: 'default' }}>Historial de Ventas</Typography>
             <Tooltip title="Regresar a la pagina anterior" arrow placement="top">
                 <Button size="small" component={Link}
                     to="/ventas"
                     variant="outlined"
                     sx={{ mt: 2, marginBottom: '10px', marginRight: '10px' }}>Regresar
-                    </Button>
+                </Button>
             </Tooltip>
             <Box sx={{ display: 'flex', gap: 2, mb: 2, flexWrap: 'wrap' }}>
                 <TextField
@@ -128,7 +170,9 @@ const VentasRegistro = () => {
             </Box>
             <Divider />
 
-            <TableContainer component={Paper} sx={{ height: "clamp(10vh, 56vh, 60vh)" }}>
+            <Toaster duration={2000} />
+
+            <TableContainer component={Paper} sx={{ height: "clamp(10vh, 56vh, 60vh)", cursor: 'default' }}>
 
                 <Toaster duration={2000} />
                 <Table sx={{ minWidth: 650 }} aria-label="Tabla de ventas" stickyHeader size="small">
@@ -139,6 +183,7 @@ const VentasRegistro = () => {
                             <TableCell align="center" sx={{ fontWeight: 'bold' }}>CANTIDAD</TableCell>
                             <TableCell align="center" sx={{ fontWeight: 'bold' }}>TOTAL</TableCell>
                             <TableCell align="center" sx={{ fontWeight: 'bold' }}>FECHA DE VENTA</TableCell>
+                            <TableCell align="center" sx={{ fontWeight: 'bold' }}>ACCIONES</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -158,12 +203,75 @@ const VentasRegistro = () => {
                                         <TableCell align="center">{venta.cantidad}</TableCell>
                                         <TableCell align="center">${venta.total}</TableCell>
                                         <TableCell align="center">{venta.fechaVenta}</TableCell>
+                                        <TableCell align="center">
+                                            <Tooltip title="Actualizar datos" arrow placement="top">
+                                                <IconButton color="warning" onClick={() => handleEditClick(venta)}><EditIcon /></IconButton>
+                                            </Tooltip>
+                                        </TableCell>
                                     </TableRow>
                                 ))
                             )}
                     </TableBody>
                 </Table>
 
+                <Modal open={openEdit} onClose={(_event, reason) => {
+                    if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+                        setOpenEdit(false);
+                    }
+                }} disableEscapeKeyDown>
+                    <Box sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '40vw',
+                        minWidth: '300px',
+                        bgcolor: 'background.paper',
+                        boxShadow: 24,
+                        p: 4
+                    }}>
+                        <Typography variant="h6" sx={{cursor: 'default'}}>Editar Venta</Typography>
+                        <TextField
+                            label="Nombre del Producto"
+                            value={selectedVenta?.producto?.nombre || ""}
+                            fullWidth
+                            margin="normal"
+                            disabled
+                        />
+                        <TextField
+                            label="Cantidad"
+                            type="text"
+                            value={cantidad}
+                            fullWidth
+                            margin="normal"
+                            onChange={(e) => {
+                                const maxStock = selectedVenta?.producto?.stock || 0;
+                                const value = Math.min(Math.max(1, parseInt(e.target.value) || 1), maxStock);
+                                setCantidad(value);
+                            }}
+                        />
+                        <TextField
+                            label="Total"
+                            type="text"
+                            value={(selectedVenta?.producto?.precio * cantidad).toFixed(2)}
+                            fullWidth
+                            disabled
+                            margin="normal"
+                        />
+
+                        <Box display="flex" justifyContent="end" gap={2} mt={2}>
+                            <Tooltip title='Actualizar datos' arrow placement="top">
+                                <Button
+                                    variant="contained"
+                                    onClick={handleUpdateVenta}
+                                    disabled={actualozando}
+
+                                >{actualozando ? <CircularProgress size={25} color="inherit" /> : 'Actualizar'}</Button>
+                            </Tooltip>
+                            <Button color="error" variant="outlined" disabled={actualozando} onClick={() => { setOpenEdit(false), setSelectedVenta(null) }}>Cancelar</Button>
+                        </Box>
+                    </Box>
+                </Modal>
 
             </TableContainer>
 

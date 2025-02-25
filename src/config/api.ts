@@ -10,6 +10,7 @@ export const API_ROUTES = {
   ELIMINAR_PRODUCTO: (codigo: String) => `${API_URL}/productos/desactivar/${codigo}`,
   ACTUALIZAR_PRODUCTO_CODIGO: (codigo: string) => `${API_URL}/productos/updateByCodigo/${codigo}`,
   VENTAS: `${API_URL}/ventas`,
+  ACTUALIZAR_VENTAS:(id:number) => `${API_URL}/ventas/${id}`,
   REPORTES: `${API_URL}/reportes`,
   ELIMINAR_REPORTE: (id: number) => `${API_URL}/reportes/desactivarReporte/${id}`,
   PERSONAS_POR_FECHA: `${API_URL}/personas/por-fecha`,

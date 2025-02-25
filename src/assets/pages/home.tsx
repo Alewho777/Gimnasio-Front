@@ -120,12 +120,12 @@ const Home = () => {
             }}
           />
 
-          <Typography fontSize={'clamp(1.5rem, 3vw, 3rem)'} sx={{ zIndex: 3, color: 'white' }}>
+          <Typography fontSize={'clamp(1.5rem, 3vw, 3rem)'} sx={{ zIndex: 3, color: 'white', cursor: 'default' }}>
             GESTION DE GIMNASIO
           </Typography>
         </Box>
         <Grid2 display={'flex'}>
-          <Typography fontSize={'clamp(1.5rem, 2.5vw, 3rem)'}>
+          <Typography fontSize={'clamp(1.5rem, 2.5vw, 3rem)'} sx={{cursor: 'default'}}>
 
             CONTROL DE PERSONAS
           </Typography>
@@ -176,7 +176,7 @@ const Home = () => {
           </Tooltip>
         </Grid2>
         <Grid2 display={'flex'}>
-          <Typography fontSize={'clamp(1.5rem, 2.5vw, 3rem)'}>
+          <Typography fontSize={'clamp(1.5rem, 2.5vw, 3rem)'} sx={{cursor: 'default'}}>
             CONTROL DE PRODUCTOS
           </Typography>
         </Grid2>

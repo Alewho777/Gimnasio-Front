@@ -49,18 +49,18 @@ const StatCard = ({ title, value, icon, backgroundcolor, colorForent, iconColor,
                     >
                         {icon}
                     </Box>
-                    <Typography fontSize={20} sx={{ opacity: 0.8 }}>
+                    <Typography fontSize={20} sx={{ opacity: 0.8,cursor: 'default' }}>
                     {title}
                 </Typography>
                 </Box>
 
                 {/* Valor */}
-                <Typography variant="h4" sx={{ fontWeight: "bold", mt: 2 }}>
+                <Typography variant="h4" sx={{ fontWeight: "bold", mt: 2, cursor: 'default' }}>
                     {value}
                 </Typography>
 
                 {/* Título */}
-                <Typography variant="subtitle1" sx={{ opacity: 0.8 }}>
+                <Typography variant="subtitle1" sx={{ opacity: 0.8, cursor: 'default' }}>
                     {subtitle}
                 </Typography>
             </CardContent>

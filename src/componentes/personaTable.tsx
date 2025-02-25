@@ -47,7 +47,7 @@ const PersonaTable = () => {
   const [eliminando, setEliminando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [open, setOpen] = React.useState(false);
-  const [filtroEstado, setFiltroEstado] = useState<"todos" | "1" | "2">("todos");
+  const [filtroEstado, setFiltroEstado] = useState<"todos" | "1" | "2">("1");
   const [searchTerm, setSearchTerm] = useState("");
   const [fechaFiltro, setFechaFiltro] = useState<Dayjs | null>(null);
 
@@ -92,6 +92,7 @@ const PersonaTable = () => {
   }, [selectedPersona?.fechaInscripcion, selectedPersona?.tipoInscripcion]);
 
   const personasFiltradas = personas.filter(persona => {
+    if (persona.estado.toString()==2) return false;
     if (filtroEstado !== "todos" && persona.estado_inscripcion.toString() !== filtroEstado) return false;
 
     if (searchTerm && !(
@@ -107,13 +108,10 @@ const PersonaTable = () => {
       const añoSeleccionado = fechaFiltro.year();
 
       const fechaInicio = dayjs(persona.fechaInscripcion);
-      const fechaFin = dayjs(persona.fecha_fin_Inscripcion);
 
       if (!(
-        fechaInicio.month() <= mesSeleccionado &&
-        fechaInicio.year() <= añoSeleccionado &&
-        fechaFin.month() >= mesSeleccionado &&
-        fechaFin.year() >= añoSeleccionado
+        fechaInicio.month() == mesSeleccionado &&
+        fechaInicio.year() == añoSeleccionado
       )) return false;
     }
 
@@ -251,7 +249,7 @@ const PersonaTable = () => {
       alignItems: "center",
 
     }}>
-      <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} display={"flex"} justifyContent={"center"}>GESTION DE CLIENTES</Typography>
+      <Typography fontSize={'clamp(1rem, 3.5vw, 3rem)'} display={"flex"} justifyContent={"center"} sx={{cursor: 'default'}}>GESTION DE CLIENTES</Typography>
       <Tooltip title="Regresar a la pagina anterior" arrow placement="top">
         <Button size="small" component={Link}
           to="/personas"
@@ -302,7 +300,7 @@ const PersonaTable = () => {
       </Box>
       <Divider />
 
-      <TableContainer component={Paper} sx={{ height: "clamp(10vh, 56vh, 60vh)" }}>
+      <TableContainer component={Paper} sx={{ height: "clamp(10vh, 56vh, 60vh)", cursor: 'default'}}>
         <Toaster duration={2000} />
         <Table sx={{ minWidth: 650 }} aria-label="Tabla de personas" stickyHeader size="small">
           <TableHead>
@@ -365,7 +363,7 @@ const PersonaTable = () => {
               )}
           </TableBody>
         </Table>
-        <Modal open={openEdit} onClose={(event,reason) => {
+        <Modal open={openEdit} onClose={(_event,reason) => {
           if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
             setOpenEdit(false);
           }
@@ -384,7 +382,7 @@ const PersonaTable = () => {
             boxShadow: 24,
             p: 4,
           }}>
-            <Typography variant="h6">Editar Persona</Typography>
+            <Typography variant="h6" sx={{cursor: 'default'}}>Editar Persona</Typography>
             <TextField
               label="Cédula"
               value={selectedPersona?.cedula || ""}

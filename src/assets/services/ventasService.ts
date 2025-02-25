@@ -47,3 +47,22 @@ export const getVentasPorFecha = async (start: string, end: string): Promise<Ven
         throw new Error("Error al obtener ventas por fecha");
     }
 };
+
+export const actualizarVenta = async (id: number, venta: Omit<Ventas, 'id' | 'producto' | 'fechaVenta'>): Promise<void> => {
+    try {
+        await axios.put(
+            API_ROUTES.ACTUALIZAR_VENTAS(id),
+            {
+                ...venta,
+                id: id,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            }
+        );
+    } catch (error) {
+        throw error;
+    }
+};

@@ -94,7 +94,7 @@ const Login = () => {
             image={logoGF}
           />
         </Box>
-        <Typography variant="h4" align="center" gutterBottom >
+        <Typography variant="h4" align="center" gutterBottom sx={{cursor: 'default'}}>
           Iniciar Sesión
         </Typography>
         <form onSubmit={handleSubmit}>

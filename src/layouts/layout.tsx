@@ -91,19 +91,12 @@ export default function Layout() {
 
               <Grid2 flex={1} justifyItems={"center"} flexDirection={'row'} display={'flex'}>
 
-                {/* <CardMedia
-                  component='img'
-                  sx={{ height: "6vh", width: "5vw", objectFit: "cover" }}
-                  image={logoGF}
-                /> */}
-                <Typography variant="h3" style={{ fontSize: 'clamp(1rem, 3.5vw, 3rem)' }} >
+                <Typography variant="h3" style={{ fontSize: 'clamp(1rem, 3.5vw, 3rem)', cursor: 'default' }} >
                   Gym & Fitness
                 </Typography>
               </Grid2>
               <Grid2 flex={1} justifyItems={"end"} flexWrap={'wrap'} paddingRight={'50px'}>
-                {/* <Typography sx={{ display: { xs: "none", sm: "block" } }} style={{ fontSize: 'clamp(0.8rem, 1vw, 2rem)', }}  >
-                  Bienvenido {user?.username}
-                </Typography> */}
+
                 <Tooltip title={user?.username} arrow followCursor>
                   <Avatar
                     alt="Usuario"
@@ -130,25 +123,6 @@ export default function Layout() {
                 </Menu>
 
               </Grid2>
-              {/* <Grid2>
-                <Button
-                  color="inherit"
-                  onClick={() => {
-                    logout();
-                    navigate('/login');
-                  }}
-                  style={{ fontSize: 'clamp(0.8rem, 1vw, 2rem)' }}
-                >
-                  Cerrar Sesión
-                </Button>
-              </Grid2> */}
-              {/* <Grid2>
-              <Tooltip title='Cambiar de Tema' arrow followCursor>
-                <IconButton onClick={() => setDarkMode(!darkMode)} color="inherit">
-                  {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-                </IconButton>
-                </Tooltip>
-              </Grid2> */}
             </Grid2>
           </Toolbar>
         </AppBar>
